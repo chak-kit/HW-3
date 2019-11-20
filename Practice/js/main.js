@@ -89,10 +89,10 @@ console.log(inputNumers(numList));
 
 try {
   for (let i = 0; i <= 11; i++) {
-    console.log(i);
     if (i === 11) {
       throw new Error('Ten is enough')
     }
+    console.log(i);
   }
 } catch (error) {
   console.error(error, 'catch block');
