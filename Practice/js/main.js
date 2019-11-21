@@ -1,3 +1,5 @@
+/*  Closure  */
+
 function makeAdder(num) {
   return function addFunction(x) {
     return num + x
@@ -104,29 +106,29 @@ try {
 
 /*  Promises  */
 
-// const promise = new Promise(function (resolve, reject) {
-//   setTimeout(() => {
-//     resolve('a')
-//   }, 1000)
-// })
-//   .then(result => {
-//     return new Promise(function (resolve, reject) {
-//       setTimeout(() => {
-//         return resolve(result + 'b')
-//       }, 1000)
-//     })
-//   })
-//   .then(() => {
-//       throw new Error('ab')
-//     }
-//   )
-//   .then(null, onRejected => {
-//       throw onRejected
-//     }
-//   )
-//   .catch(function (error) {
-//     console.error(error)
-//   });
+const promise = new Promise(function (resolve) {
+  setTimeout(() => {
+    resolve('a')
+  }, 1000)
+})
+  .then(result => {
+    return new Promise(function (resolve) {
+      setTimeout(() => {
+        return resolve(result + 'b')
+      }, 1000)
+    })
+  })
+  .then(() => {
+      throw new Error('ab')
+    }
+  )
+  .then(null, onRejected => {
+      throw onRejected
+    }
+  )
+  .catch(function (error) {
+    console.error(error, 'catch block')
+  });
 
 
 /*   Async / Await  */
@@ -149,7 +151,7 @@ async function newPromiseWay(b) {
     await waitAsecond(result + b);
     await thisThrows()
   } catch (error) {
-    console.error(error);
+    console.error(error, 'catch block');
   }
 }
 
