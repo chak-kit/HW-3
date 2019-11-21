@@ -3,6 +3,7 @@ function makeAdder(num) {
     return num + x
   }
 }
+
 let addFunction = makeAdder(5);
 console.log(addFunction(2));
 
@@ -79,9 +80,11 @@ console.log(morderbrand.canFly());
 /*  Pure Function  */
 
 const numList = '11-15-1944';
+
 function inputNumers(numbers) {
   return numbers.split("-").reverse().join(", ");
 }
+
 console.log(inputNumers(numList));
 
 
@@ -101,30 +104,55 @@ try {
 
 /*  Promises  */
 
-const promise = new Promise(function (resolve, reject) {
-  setTimeout(() => {
-    resolve('a')
-  }, 1000)
-})
-  .then(result => {
-    return new Promise(function (resolve, reject) {
-      setTimeout(() => {
-        return resolve(result + 'b')
-      }, 1000)
-    })
-  })
-  .then(() => {
-      throw new Error('ab')
-    }
-  )
-  .then(null, onRejected => {
-      throw onRejected
-    }
-  )
-  .catch(function (error) {
-    console.error(error)
-  });
+// const promise = new Promise(function (resolve, reject) {
+//   setTimeout(() => {
+//     resolve('a')
+//   }, 1000)
+// })
+//   .then(result => {
+//     return new Promise(function (resolve, reject) {
+//       setTimeout(() => {
+//         return resolve(result + 'b')
+//       }, 1000)
+//     })
+//   })
+//   .then(() => {
+//       throw new Error('ab')
+//     }
+//   )
+//   .then(null, onRejected => {
+//       throw onRejected
+//     }
+//   )
+//   .catch(function (error) {
+//     console.error(error)
+//   });
 
 
 /*   Async / Await  */
+
+function waitAsecond(a) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log(a);
+      resolve(a);
+    }, 1000);
+  });
+}
+
+async function thisThrows() {
+  throw new Error('ab');
+}
+async function newPromiseWay(b) {
+  try {
+    let result = await waitAsecond('a');
+    await waitAsecond(result + b);
+    await thisThrows()
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+newPromiseWay('b');
+
 
